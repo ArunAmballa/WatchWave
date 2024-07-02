@@ -6,14 +6,23 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 const UploadForm = () => {
- const [selectedFile, setSelectedFile] = useState(null);
+
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [author, setAuthor] = useState('');
+  const [selectedFile, setSelectedFile] = useState(null);
 
  const handleFileChange = (e) => {
    setSelectedFile(e.target.files[0]);
  };
 
  const handleUpload = async () => {
-   try {
+   try {  
+
+    if (!title || !author) {
+      alert('Title and Author are required fields.');
+      return;
+}
      const formData = new FormData();
      formData.append('filename', selectedFile.name);
      const initializeRes = await axios.post('http://localhost:8080/upload/initialize', formData, {
@@ -56,8 +65,11 @@ const UploadForm = () => {
      const completeRes = await axios.post('http://localhost:8080/upload/complete', {
        filename: selectedFile.name,
        totalChunks: totalChunks,
-       uploadId: uploadId
-     });
+       uploadId: uploadId,
+       title: title,
+       description: description,
+       author: author
+});
 
      console.log(completeRes.data);
    } catch (error) {
@@ -66,20 +78,55 @@ const UploadForm = () => {
  };
 
  return (
-   <div className='m-10'>
-     <form encType="multipart/form-data">
-       <input type="file" name="file" onChange={handleFileChange} />
-       <button
-         type="button"
-         onClick={handleUpload}
-         className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
-       >
-         Upload
-       </button>
-     </form>
-   </div>
+      <div className='container mx-auto max-w-lg p-10'>
+      <form encType="multipart/form-data">
+        <div className="mb-4">
+          <input type="text"
+                name="title"
+                placeholder="Title"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                required
+                className="px-3 py-2 w-full border rounded-md focus:outline-none focus:border-blue-500 text-black" />
+        </div>
+        <div className="mb-4">
+          <input type="text"
+                name="description"
+                placeholder="Description"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                className="px-3 py-2 w-full border rounded-md focus:outline-none focus:border-blue-500 text-black" />
+        </div>
+        <div className="mb-4">
+          <input type="text"
+                name="author"
+                placeholder="Author"
+                value={author}
+                onChange={(e) => setAuthor(e.target.value)}
+                required
+                className="px-3 py-2 w-full border rounded-md focus:outline-none focus:border-blue-500 text-black" />
+        </div>
+        <div className="mb-4">
+          <input type="file"
+                name="file"
+                onChange={handleFileChange}
+                className="px-3 py-2 w-full border rounded-md focus:outline-none focus:border-blue-500" />
+        </div>
+        <button
+          type="button"
+          onClick={handleUpload}
+          className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+        >
+          Upload
+        </button>
+      </form>
+    </div>
  );
 };
 
 
 export default UploadForm;
+
+
+
+
