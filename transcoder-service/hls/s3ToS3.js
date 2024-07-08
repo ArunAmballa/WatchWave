@@ -25,7 +25,6 @@ const s3ToS3 = async (filename) => {
    const mp4FileName = filename+'.mp4';
    console.log("mp4File",mp4FileName)
    console.log('Starting script');
-   console.time('req_time');
    try {
        console.log('Downloading s3 mp4 file locally');
        const mp4FilePath = `${mp4FileName}`;
@@ -149,15 +148,12 @@ const s3ToS3 = async (filename) => {
                    : null
            };
            await s3.upload(uploadParams).promise();
+           console.log("filepath",filePath)
            fs.unlinkSync(filePath);
        }
        console.log(
            `Uploaded media m3u8 playlists and ts segments to s3. Also deleted locally`
        );
-
-
-       console.log('Success. Time taken: ');
-       console.timeEnd('req_time');
    } catch (error) {
        console.error('Error:', error);
    }

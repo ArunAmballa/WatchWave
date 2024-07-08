@@ -40,7 +40,7 @@ export const uploadChunk = async (req, res) => {
        const s3 = new AWS.S3({
            accessKeyId: process.env.AWS_ACCESS_KEY_ID,
            secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-           region: 'ap-south-1'
+           region: 'us-west-1'
        });
        const bucketName = process.env.AWS_BUCKET;
 
@@ -76,7 +76,7 @@ export const completeUpload = async (req, res) => {
        const s3 = new AWS.S3({
            accessKeyId: process.env.AWS_ACCESS_KEY_ID,
            secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-           region: 'ap-south-1'
+           region: 'us-west-1'
        });
        const bucketName = process.env.AWS_BUCKET;
 
@@ -105,8 +105,8 @@ export const completeUpload = async (req, res) => {
        const url = uploadResult.Location;
        console.log("Video uploaded at ", url);
 
-       await addVideoDetailsToDB(title, description, author, url);
-       pushVideoForEncodingToKafka(title)
+       await addVideoDetailsToDB(title, description, author, url); // Saving the video  Details in Postgres
+       pushVideoForEncodingToKafka(title) // Publishing the video to Kafka
 
        return res.status(200).json({ message: "Uploaded successfully!!!" });
 

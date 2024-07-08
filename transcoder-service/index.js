@@ -2,11 +2,9 @@ import express from "express"
 import dotenv from "dotenv"
 import cors from "cors";
 import KafkaConfig from "./kafka/kafka.js";
-import convertToHLS from "./hls/transcode.js";
 import s3ToS3 from "./hls/s3ToS3.js";
 
 const app=express();
-
 
 dotenv.config();
 
@@ -23,16 +21,6 @@ app.use(cors({
     res.send("WatchWave Transcoder Service");
  })
 
- app.get("/transcode",(req,res)=>{
-//    convertToHLS()
-        s3ToS3();
-   res.send('hello')
- })
-
-// const kafkaconfig =  new KafkaConfig()
-// kafkaconfig.consume("transcode", (value)=>{
-//    console.log("got data from kafka : " , value)
-// })
 
 const kafkaconfig = new KafkaConfig()
 kafkaconfig.consume("transcode", async (message) => {

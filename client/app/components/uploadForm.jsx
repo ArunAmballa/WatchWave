@@ -1,6 +1,3 @@
-
-// client
-
 "use client"
 import React, { useState } from 'react';
 import axios from 'axios';
@@ -14,6 +11,7 @@ const UploadForm = () => {
 
  const handleFileChange = (e) => {
    setSelectedFile(e.target.files[0]);
+   console.log("File",e.target.files[0])
  };
 
  const handleUpload = async () => {
@@ -22,7 +20,8 @@ const UploadForm = () => {
     if (!title || !author) {
       alert('Title and Author are required fields.');
       return;
-}
+    }
+
      const formData = new FormData();
      formData.append('filename', selectedFile.name);
      const initializeRes = await axios.post('http://localhost:8080/upload/initialize', formData, {
@@ -31,6 +30,8 @@ const UploadForm = () => {
        }
      }
      );
+
+
      const { uploadId } = initializeRes.data;
      console.log('Upload id is ', uploadId);
 
@@ -43,7 +44,7 @@ const UploadForm = () => {
 
      for (let chunkIndex = 0; chunkIndex < totalChunks; chunkIndex++) {
 
-       const chunk = selectedFile.slice(start, start + chunkSize);
+       const chunk = selectedFile.slice(start, start + chunkSize); //The slice() method of the Blob interface creates and returns a new Blob object which contains data from a subset of the blob on which it's called.
        start += chunkSize;
        const chunkFormData = new FormData();
        chunkFormData.append('filename', selectedFile.name);
@@ -71,7 +72,7 @@ const UploadForm = () => {
        author: author
 });
 
-     console.log(completeRes.data);
+     console.log("Complete Response",completeRes.data);
    } catch (error) {
      console.error('Error uploading file:', error);
    }

@@ -1,8 +1,7 @@
 "use client"
 import React, { useEffect, useState } from 'react';
 import axios from "axios"
-import dynamic from 'next/dynamic'
-const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
+import VideoPlayer from './VideoPlayer';
 
 const YouTubeHome = () => {
    const [videos, setVideos] = useState([]);
@@ -35,11 +34,7 @@ const YouTubeHome = () => {
                        <div key={video.id}
                            className="border rounded-md overflow-hidden">
                            <div>
-                               <ReactPlayer url={video.url}
-                                   width="360px"
-                                   height="180px"
-                                   controls={true}
-                               />
+                                <VideoPlayer url={video.url}/>
                            </div>
                            <div className="p-4">
                                <h2 className="text-lg font-semibold mb-2">{video.title}</h2>

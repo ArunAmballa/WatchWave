@@ -2,7 +2,7 @@ import express from "express";
 import router from "./routes/upload.route.js";
 import dotenv from "dotenv"
 import cors from "cors";
-import kafkapublisherrouter from "./routes/kafkapublisher.route.js"
+
 
 const app=express();
 dotenv.config();
@@ -18,7 +18,7 @@ app.use(cors({
 app.use(express.json())
 
 app.use("/upload",router)
-app.use("/publish",kafkapublisherrouter)
+
 
 
 app.listen(PORT,()=>{

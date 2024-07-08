@@ -2,9 +2,18 @@
 import React, { useRef, useEffect } from 'react';
 import Hls from 'hls.js';
 
-const VideoPlayer = () => {
+const VideoPlayer = ({url}) => {
    const videoRef = useRef(null);
-   const src = "https://watchwave.s3.us-west-1.amazonaws.com/4+Network+Protocols+-+%5B+telegram+%40Myhackersworld2+%5D.mp4";
+
+    const base = url.replace('.mp4', '');
+    
+    // Extract the filename
+    const filename = base.split('/').pop();
+    
+    // Create the new URL
+    const newUrl = `${base.substring(0, base.lastIndexOf('/'))}/hls/${filename}_mp4_master.m3u8`;
+    
+    const src=newUrl;
 
    useEffect(() => {
        const video = videoRef.current;
