@@ -148,7 +148,6 @@ const s3ToS3 = async (filename) => {
                    : null
            };
            await s3.upload(uploadParams).promise();
-           console.log("filepath",filePath)
            fs.unlinkSync(filePath);
        }
        console.log(

@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from "axios"
 import VideoPlayer from './VideoPlayer';
+import { useVideosStore } from '../zustand/useVideoStore';
 
 const YouTubeHome = () => {
    const [videos, setVideos] = useState([]);
@@ -29,6 +30,7 @@ const YouTubeHome = () => {
            {loading ? (
                <div className='container mx-auto flex justify-center items-center h-screen'>Loading...</div>
            ) : (
+            <div>
                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 m-10">
                    {videos.map(video => (
                        <div key={video.id}
@@ -44,6 +46,7 @@ const YouTubeHome = () => {
                        </div>
                    ))}
                </div>
+            </div>
            )}
        </div>
    );
