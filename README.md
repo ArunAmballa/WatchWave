@@ -17,4 +17,5 @@
 
 <h1>Architecture </h1>
 
-![Screenshot 2024-07-10 at 8 25 54 PM](https://github.com/ArunAmballa/WatchWave/assets/53054775/64d4e1e8-8294-4985-bf0a-e669532246a4)
+![Screenshot 2024-07-10 at 8 35 55 PM](https://github.com/ArunAmballa/WatchWave/assets/53054775/30c2912c-7583-4e93-adc9-6b13d0d84660)
+
