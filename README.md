@@ -6,6 +6,8 @@
 <li>Node.js </li>
 <li>Express.js </li>
 <li>Next Auth</li>
+<li>Prisma ORM</li>
+<li>Postgres</li>
 <li>Apache Kafka</li>
 <li>Aws S3</li>
 <li>Aws Open Search</li>
