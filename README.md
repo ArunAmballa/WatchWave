@@ -2,12 +2,13 @@
 
 
 <h1>Tech Stack</h1>
-<li>Next.js </li>
-<li>Node.js </li>
-<li>Express.js </li>
-<li>Next Auth</li>
-<li>Prisma ORM</li>
-<li>Postgres</li>
+<li>Next.js for frontend</li>
+<li>Node.js for Backend </li>
+<li>Express.js for Backend</li>
+<li>Next Auth for Authentication</li>
+<li>Prisma as ORM</li>
+<li>Zusatnd for State Management</li>
+<li>Postgres DB</li>
 <li>Apache Kafka</li>
 <li>Aws S3</li>
 <li>Aws Open Search</li>
